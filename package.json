@@ -1,0 +1,24 @@
+{
+  "name": "video-sync",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "./node_modules/.bin/nodemon -L index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/edison-cy-yang/video-sync.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/edison-cy-yang/video-sync/issues"
+  },
+  "homepage": "https://github.com/edison-cy-yang/video-sync#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^2.0.2"
+  }
+}
