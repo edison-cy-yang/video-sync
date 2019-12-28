@@ -22,9 +22,9 @@
 
   // 4. The API will call this function when the video player is ready.
   function onPlayerReady(event) {
-    setTimeout(() => {
-      event.target.playVideo();
-    }, 2000); 
+    // setTimeout(() => {
+    //   event.target.playVideo();
+    // }, 2000); 
   }
 
   // 5. The API calls this function when the player's state changes.
@@ -33,7 +33,7 @@
   var done = false;
   function onPlayerStateChange(event) {
     if (event.data == YT.PlayerState.PLAYING && !done) {
-      setTimeout(stopVideo, 6000);
+      // setTimeout(stopVideo, 6000);
       done = true;
     }
   }
@@ -41,21 +41,30 @@
     player.stopVideo();
   }
 
-  function playVideo() {
-    player.playVideo();
-  }
+  const playVideo = function() {
+    $('#play').on('click', () => {
+      console.log("play");
+      player.playVideo();
+    });
+  };
 
-  function pauseVideo() {
-    player.pauseVideo();
+  const pauseVideo = function() {
+    $('#stop').on('click', () => {
+      console.log("stop");
+      player.pauseVideo();
+    });
+  };
+
+  const loopProgressBar = function() {
+    //find total time of video, currentTime/totalTime to get percentage
+    setInterval(() => {
+      const percentageWatched = player.getCurrentTime() / player.getDuration() * 100;
+      $('#square').css("left", `${percentageWatched}%`);
+    }, 1000);
   }
 
   $(document).ready(function() {
-    $('#play').on('click', () => {
-      console.log("play");
-      playVideo();
-    });
-    $('#stop').on('click', () => {
-      console.log("stop");
-      pauseVideo();
-    })
+    playVideo();
+    pauseVideo();
+    loopProgressBar();
   })
