@@ -56,15 +56,26 @@
   };
 
   const loopProgressBar = function() {
-    //find total time of video, currentTime/totalTime to get percentage
     setInterval(() => {
       const percentageWatched = player.getCurrentTime() / player.getDuration() * 100;
       $('#square').css("left", `${percentageWatched}%`);
-    }, 1000);
+    }, 200);
   }
+
+  const changePlayTime = function() {
+    const progressBar = $('#progress-bar');
+    progressBar.on('click', function(event) {
+      const offset = event.pageX - $('#progress-line').offset().left;
+      console.log(offset);
+      //find out the second video should be at relative to the offset
+      const newPlayTime = offset / 640 * player.getDuration();
+      player.seekTo(newPlayTime, true);
+    });
+  };
 
   $(document).ready(function() {
     playVideo();
     pauseVideo();
     loopProgressBar();
+    changePlayTime();
   })
