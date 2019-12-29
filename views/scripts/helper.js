@@ -1,3 +1,5 @@
+const socket = io();
+  
   // 2. This code loads the IFrame Player API code asynchronously.
   var tag = document.createElement('script');
 
@@ -45,6 +47,7 @@
     $('#play').on('click', () => {
       console.log("play");
       player.playVideo();
+      socket.emit('play video', "play video");
     });
   };
 
@@ -52,6 +55,7 @@
     $('#stop').on('click', () => {
       console.log("stop");
       player.pauseVideo();
+      socket.emit('pause video', "pause video");
     });
   };
 
@@ -70,15 +74,25 @@
       //find out the second video should be at relative to the offset
       const newPlayTime = offset / 640 * player.getDuration();
       player.seekTo(newPlayTime, true);
+      socket.emit('change play time', newPlayTime);
     });
   };
 
-  const socket = io();
-  console.log("after socket");
+
+ 
 
   $(document).ready(function() {
     playVideo();
     pauseVideo();
     loopProgressBar();
     changePlayTime();
+    socket.on('play video', (msg) => {
+      player.playVideo();
+    });
+    socket.on('pause video', () => {
+      player.pauseVideo();
+    });
+    socket.on('change play time', (newPlayTime) => {
+      player.seekTo(newPlayTime, true);
+    });
   })
