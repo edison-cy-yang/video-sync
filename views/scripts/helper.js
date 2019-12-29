@@ -43,7 +43,7 @@ const socket = io();
     player.stopVideo();
   }
 
-  const playVideo = function() {
+  const onPlayVideo = function() {
     $('#play').on('click', () => {
       console.log("play");
       player.playVideo();
@@ -82,7 +82,7 @@ const socket = io();
  
 
   $(document).ready(function() {
-    playVideo();
+    onPlayVideo();
     pauseVideo();
     loopProgressBar();
     changePlayTime();
