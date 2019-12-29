@@ -13,18 +13,17 @@ app.get('/', (req, res) => {
 
 io.on('connection', function(socket){
   console.log('a user connected');
-  socket.on('play video', (msg) => {
+  socket.on('playerEvent', (msg) => {
     console.log(msg);
-    io.emit('play video', msg);
+    if (msg.state === "play") {
+      io.emit('play video', msg);
+    } else if (msg.state === "pause") {
+      io.emit('pause video', msg);
+    } else if (msg.state === "change time") {
+      console.log(msg);
+      io.emit("change play time", msg.time);
+    }    
   });
-  socket.on('pause video', (msg) => {
-    console.log(msg);
-    io.emit('pause video', "pause video");
-  });
-  socket.on('change play time', (msg) => {
-    console.log(msg);
-    io.emit('change play time', msg);
-  })
   socket.on('disconnet', () => {
     console.log("user disconnected");
   });

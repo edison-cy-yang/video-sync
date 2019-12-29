@@ -52,7 +52,8 @@ const onPlayVideo = function() {
   $("#play").on("click", () => {
     console.log("play");
     player.playVideo();
-    socket.emit("play video", "play video");
+    const playerData = { state: "play", time: player.getCurrentTime()};
+    socket.emit("playerEvent", playerData);
   });
 };
 
@@ -64,7 +65,8 @@ const onPauseVideo = function() {
   $("#stop").on("click", () => {
     console.log("stop");
     player.pauseVideo();
-    socket.emit("pause video", "pause video");
+    const playerData = { state: "pause", time: player.getCurrentTime()};
+    socket.emit("playerEvent", playerData);
   });
 };
 
@@ -84,7 +86,8 @@ const changePlayTime = function() {
     //find out the second video should be at relative to the offset
     const newPlayTime = (offset / 640) * player.getDuration();
     player.seekTo(newPlayTime, true);
-    socket.emit("change play time", newPlayTime);
+    const playerData = { state: "change time", time: newPlayTime};
+    socket.emit("playerEvent", playerData);
   });
 };
 
