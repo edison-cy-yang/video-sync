@@ -73,6 +73,9 @@
     });
   };
 
+  const socket = io();
+  console.log("after socket");
+
   $(document).ready(function() {
     playVideo();
     pauseVideo();
