@@ -1,6 +1,8 @@
 const socket = io();
 
-let videoId = "OTAKEz6DGCA";
+let videoId;
+
+
 // 2. This code loads the IFrame Player API code asynchronously.
 var tag = document.createElement("script");
 
@@ -22,7 +24,7 @@ function onYouTubeIframeAPIReady() {
   //     onStateChange: onPlayerStateChange
   //   }
   // });
-  player = new YT.Player("existing-iframe-example", {});
+  player = new YT.Player("player", {});
 }
 
 // 4. The API will call this function when the video player is ready.
@@ -125,7 +127,17 @@ const loadNewVideo = function() {
     const frame = $('iframe');
     frame.attr("src", newUrl);
   })
-}
+};
+
+//Get the video ID of the video in Iframe. 
+//This will be used for identifying same video in socket IO
+const getVideoId = function() {
+  //Get videoId
+  const videoURL = $('#player').attr("src");
+  rx = /^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/;
+  videoId = videoURL.match(rx)[1];
+  console.log(videoId);
+};
 
 $(document).ready(function() {
   onPlayVideo();
@@ -136,6 +148,7 @@ $(document).ready(function() {
   onReceivePauseCommand();
   onReceiveChangeTimeCommand();
   loadNewVideo();
+  getVideoId();
 });
 
 /*
