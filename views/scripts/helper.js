@@ -1,5 +1,6 @@
 const socket = io();
 
+let videoId = "OTAKEz6DGCA";
 // 2. This code loads the IFrame Player API code asynchronously.
 var tag = document.createElement("script");
 
@@ -10,16 +11,18 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 // 3. This function creates an <iframe> (and YouTube player)
 //    after the API code downloads.
 var player;
+let secondPlayer;
 function onYouTubeIframeAPIReady() {
-  player = new YT.Player("player", {
-    height: "390",
-    width: "640",
-    videoId: "OTAKEz6DGCA",
-    events: {
-      onReady: onPlayerReady,
-      onStateChange: onPlayerStateChange
-    }
-  });
+  // player = new YT.Player("player", {
+  //   height: "390",
+  //   width: "640",
+  //   videoId: videoId,
+  //   events: {
+  //     onReady: onPlayerReady,
+  //     onStateChange: onPlayerStateChange
+  //   }
+  // });
+  player = new YT.Player("existing-iframe-example", {});
 }
 
 // 4. The API will call this function when the video player is ready.
@@ -112,6 +115,18 @@ const onReceiveChangeTimeCommand = function() {
   });
 };
 
+///Use jquery to do form on submit, validate the url, and update the url in this YT player
+const loadNewVideo = function() {
+  const form = $("#new-video");
+  form.on('submit', function(event) {
+    event.preventDefault();
+    console.log($('#new-url').val());
+    const newUrl = $('#new-url').val();
+    const frame = $('iframe');
+    frame.attr("src", newUrl);
+  })
+}
+
 $(document).ready(function() {
   onPlayVideo();
   onPauseVideo();
@@ -120,4 +135,15 @@ $(document).ready(function() {
   onReceivePlayCommand();
   onReceivePauseCommand();
   onReceiveChangeTimeCommand();
+  loadNewVideo();
 });
+
+/*
+  change iframe to be in the page directly instead of loaded by javascript
+  create new page to enter url
+  on post /new/:url
+  do render to /new/:url
+  on get /new/:url
+  pass url in as template var
+  use template var inside the iframe
+*/

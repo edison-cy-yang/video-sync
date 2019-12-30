@@ -11,27 +11,18 @@
   <link rel="stylesheet" href="styles/index.css">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script type="text/javascript" src="./scripts/socket.io/socket.io.js"></script>
-  <script type="text/javascript" src="./scripts/helper.js"></script>
+  <script src="./scripts/search-video.js"></script>
 
   <title>Video Sync</title>
 </head>
 
 <body>
   <h1>Hello</h1>
+  <form id="new-video" action="/loadVideo" method="POST">
+    <input id="new-url" type="text" name="url" placeholder="enter the URL of the Youtube video">
+    <input type="submit" value="Submit">
+  </form>
 
-  <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
-  <div id="player"></div>
-  <div class="btn-group">
-    <button id="play" class="btn btn-default">Play</button>
-    <button id="stop" class="btn btn-primary">stop</button>
-  </div>
-  <div id="progress-bar">
-    <div id="progress-line">
-
-    </div>
-      <button id="square" class="btn btn-default"></button>
-  </div>
   <!-- Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
