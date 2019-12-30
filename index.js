@@ -24,8 +24,9 @@ app.post('/loadVideo', (req, res) => {
   console.log(req.body.url);
   const url = req.body.url;
   //extract video id from the whole Url
-
-  res.redirect(`/videos/${url}`);
+  rx = /^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/;
+  const videoId = url.match(rx)[1];
+  res.redirect(`/videos/${videoId}`);
 })
 
 io.on('connection', function(socket){
