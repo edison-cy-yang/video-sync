@@ -11,7 +11,6 @@
 #progress-bar {
   width: 640px;
   height: 35px;
-  margin-left: 5px;
   padding-top: 17.5px;
 }
 
@@ -23,4 +22,8 @@
   width: 10px;
   border-width: 2px;
   left: 0%;
+}
+
+main {
+  padding-left: 20px;
 }

@@ -18,26 +18,24 @@
 </head>
 
 <body>
-  <h1>Hello</h1>
-
-  <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
-  <!-- <div id="player"></div> -->
-  <iframe id="player"
-    width="640" height="360"
-    src=<%= videoURL %>
-    frameborder="0"
-    style="border: solid 4px #37474F"
-  ></iframe>
-  <div class="btn-group">
-    <button id="play" class="btn btn-default">Play</button>
-    <button id="stop" class="btn btn-primary">stop</button>
-  </div>
-  <div id="progress-bar">
-    <div id="progress-line">
-
+  <%- include('./partials/_header') %>
+  <main>
+    <h1>Hello</h1>
+    <iframe id="player" width="640" height="360" src=<%= videoURL %> frameborder="0"
+      style="border: solid 4px #37474F"></iframe>
+    <div class="video-controls">
+      <div class="btn-group">
+        <button id="play" class="btn btn-default">Play</button>
+        <button id="stop" class="btn btn-primary">stop</button>
+      </div>
+      <div id="progress-bar">
+        <div id="progress-line">
+        </div>
+        <button id="square" class="btn btn-default"></button>
+      </div>
     </div>
-      <button id="square" class="btn btn-default"></button>
-  </div>
+  </main>
+
   <!-- Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
