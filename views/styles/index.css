@@ -24,6 +24,10 @@
   left: 0%;
 }
 
+button {
+  margin: 5px;
+}
+
 main {
   padding-left: 20px;
 }
